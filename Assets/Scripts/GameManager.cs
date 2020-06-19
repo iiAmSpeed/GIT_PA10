@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,15 @@ public class GameManager : MonoBehaviour
     {
         if (Time.timeScale == 0 && Input.GetKeyDown(KeyCode.Return))
             StartGame();
+
+        if(SceneManager.GetActiveScene().name == "GameOver")
+        {
+            GameOver();
+            if(Input.GetKeyDown(KeyCode.Return))
+            {
+                SceneManager.LoadScene("SampleScene");
+            }
+        }
     }
 
     public void UpdateScore(int value)
@@ -41,5 +51,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
         Txt_Message.text = "GAMEOVER! \nPRESS ENTER TO RESTART GAME.";
         Txt_Message.color = Color.red;
+        
     }
 }
